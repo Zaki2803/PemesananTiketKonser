@@ -1,0 +1,12 @@
+node_modules/
+.env
+
+# Abaikan semua file di dalam uploads, tapi keep foldernya
+uploads/artists/*
+uploads/events/*
+uploads/payments/*
+
+# Kecuali .gitkeep
+!uploads/artists/.gitkeep
+!uploads/events/.gitkeep
+!uploads/payments/.gitkeep
