@@ -28,10 +28,18 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 // ==============================
 const corsOptions = {
-  origin: [
-    process.env.WEB_URL   || 'http://localhost:5173', // Web admin (React/Vite)
-    process.env.MOBILE_URL || 'http://localhost:8081', // Mobile (Expo)
-  ],
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      process.env.WEB_URL   || 'http://localhost:5173',
+      process.env.MOBILE_URL || 'http://localhost:8081',
+    ];
+    // Izinkan request tanpa origin (React Native, Postman, mobile apps)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS: Origin ${origin} tidak diizinkan`));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
