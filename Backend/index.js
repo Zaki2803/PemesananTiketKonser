@@ -10,6 +10,7 @@ import adminEventRoutes from './routes/admin/eventRoutes.js';
 import adminTicketCategoryRoutes from './routes/admin/ticketCategoryRoutes.js';
 import adminOrderRoutes from './routes/admin/orderRoutes.js';
 import adminPaymentRoutes from './routes/admin/paymentRoutes.js';
+import adminDashboardRoutes from './routes/admin/dashboardRoutes.js';
 
 // Customer Routes
 import customerAuthRoutes from './routes/customer/customerAuthRoutes.js';
@@ -26,7 +27,17 @@ const PORT = process.env.PORT || 3000;
 // ==============================
 // Middleware
 // ==============================
-app.use(cors());
+const corsOptions = {
+  origin: [
+    process.env.WEB_URL   || 'http://localhost:5173', // Web admin (React/Vite)
+    process.env.MOBILE_URL || 'http://localhost:8081', // Mobile (Expo)
+  ],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
@@ -40,6 +51,7 @@ app.use('/api/admin/events',     adminEventRoutes);
 app.use('/api/admin/categories', adminTicketCategoryRoutes);
 app.use('/api/admin/orders',     adminOrderRoutes);
 app.use('/api/admin/payments',   adminPaymentRoutes);
+app.use('/api/admin/dashboard',  adminDashboardRoutes);
 
 // ==============================
 // Customer Routes
