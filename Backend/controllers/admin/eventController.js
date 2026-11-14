@@ -5,7 +5,9 @@ import fs from 'fs';
 export const getAllEvents = async (req, res) => {
   try {
     const [rows] = await db.query(`
-      SELECT e.*, a.name AS artist_name
+      SELECT e.id, e.title, e.description, e.venue, e.city, e.genre,
+             e.event_date, e.event_time, e.poster, e.status, e.created_at,
+             a.id AS artist_id, a.name AS artist_name, a.photo AS artist_photo
       FROM events e
       JOIN artists a ON e.artist_id = a.id
       ORDER BY e.event_date DESC
@@ -20,7 +22,7 @@ export const getAllEvents = async (req, res) => {
 export const getEventById = async (req, res) => {
   try {
     const [rows] = await db.query(`
-      SELECT e.*, a.name AS artist_name
+      SELECT e.*, a.name AS artist_name, a.photo AS artist_photo
       FROM events e
       JOIN artists a ON e.artist_id = a.id
       WHERE e.id = ?
@@ -42,7 +44,7 @@ export const getEventById = async (req, res) => {
 
 // POST /api/admin/events
 export const createEvent = async (req, res) => {
-  const { artist_id, title, description, venue, city, event_date, event_time, status } = req.body;
+  const { artist_id, title, description, venue, city, genre, event_date, event_time, status } = req.body;
   const poster = req.file ? req.file.path.replace(/\\/g, '/') : null;
 
   if (!artist_id || !title || !venue || !city || !event_date || !event_time) {
@@ -51,9 +53,9 @@ export const createEvent = async (req, res) => {
 
   try {
     const [result] = await db.query(
-      `INSERT INTO events (artist_id, title, description, venue, city, event_date, event_time, poster, status)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [artist_id, title, description || null, venue, city, event_date, event_time, poster, status || 'open']
+      `INSERT INTO events (artist_id, title, description, venue, city, genre, event_date, event_time, poster, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [artist_id, title, description || null, venue, city, genre || null, event_date, event_time, poster, status || 'open']
     );
     res.status(201).json({ message: 'Event berhasil ditambahkan', eventId: result.insertId });
   } catch (err) {
@@ -63,7 +65,7 @@ export const createEvent = async (req, res) => {
 
 // PUT /api/admin/events/:id
 export const updateEvent = async (req, res) => {
-  const { artist_id, title, description, venue, city, event_date, event_time, status } = req.body;
+  const { artist_id, title, description, venue, city, genre, event_date, event_time, status } = req.body;
 
   try {
     const [existing] = await db.query('SELECT * FROM events WHERE id = ?', [req.params.id]);
@@ -77,7 +79,7 @@ export const updateEvent = async (req, res) => {
 
     const e = existing[0];
     await db.query(
-      `UPDATE events SET artist_id=?, title=?, description=?, venue=?, city=?,
+      `UPDATE events SET artist_id=?, title=?, description=?, venue=?, city=?, genre=?,
        event_date=?, event_time=?, poster=?, status=? WHERE id=?`,
       [
         artist_id || e.artist_id,
@@ -85,6 +87,7 @@ export const updateEvent = async (req, res) => {
         description ?? e.description,
         venue || e.venue,
         city || e.city,
+        genre !== undefined ? genre : e.genre,
         event_date || e.event_date,
         event_time || e.event_time,
         poster,

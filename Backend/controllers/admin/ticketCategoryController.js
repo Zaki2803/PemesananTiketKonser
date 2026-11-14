@@ -15,7 +15,7 @@ export const getCategoriesByEvent = async (req, res) => {
 
 // POST /api/admin/events/:eventId/categories
 export const createCategory = async (req, res) => {
-  const { name, price, quota } = req.body;
+  const { name, benefits, price, quota } = req.body;
 
   if (!name || !price || !quota) {
     return res.status(400).json({ message: 'Name, price, dan quota wajib diisi' });
@@ -26,9 +26,9 @@ export const createCategory = async (req, res) => {
     if (event.length === 0) return res.status(404).json({ message: 'Event tidak ditemukan' });
 
     const [result] = await db.query(
-      `INSERT INTO ticket_categories (event_id, name, price, quota, remaining_quota)
-       VALUES (?, ?, ?, ?, ?)`,
-      [req.params.eventId, name, price, quota, quota]
+      `INSERT INTO ticket_categories (event_id, name, benefits, price, quota, remaining_quota)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [req.params.eventId, name, benefits || null, price, quota, quota]
     );
 
     res.status(201).json({ message: 'Kategori tiket berhasil ditambahkan', categoryId: result.insertId });
@@ -39,7 +39,7 @@ export const createCategory = async (req, res) => {
 
 // PUT /api/admin/categories/:id
 export const updateCategory = async (req, res) => {
-  const { name, price, quota } = req.body;
+  const { name, benefits, price, quota } = req.body;
 
   try {
     const [existing] = await db.query('SELECT * FROM ticket_categories WHERE id = ?', [req.params.id]);
@@ -47,7 +47,6 @@ export const updateCategory = async (req, res) => {
 
     const cat = existing[0];
 
-    // Hitung remaining_quota baru jika quota diubah
     const soldQty = cat.quota - cat.remaining_quota;
     const newQuota = quota ? parseInt(quota) : cat.quota;
     const newRemaining = newQuota - soldQty;
@@ -57,8 +56,8 @@ export const updateCategory = async (req, res) => {
     }
 
     await db.query(
-      'UPDATE ticket_categories SET name=?, price=?, quota=?, remaining_quota=? WHERE id=?',
-      [name || cat.name, price || cat.price, newQuota, newRemaining, req.params.id]
+      'UPDATE ticket_categories SET name=?, benefits=?, price=?, quota=?, remaining_quota=? WHERE id=?',
+      [name || cat.name, benefits ?? cat.benefits, price || cat.price, newQuota, newRemaining, req.params.id]
     );
 
     res.json({ message: 'Kategori tiket berhasil diperbarui' });
