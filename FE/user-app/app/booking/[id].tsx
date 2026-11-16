@@ -152,7 +152,7 @@ export default function BookingScreen() {
         availableSeats: catSeats.filter((s) => (s.display_status || s.status) === 'available').length,
       };
     });
-  }, [event, seats]);
+  }, [event, seats, categoryColorMap]);
 
   // Toggle seleksi kursi
   const toggleSeatSelection = (seat: EventSeat) => {

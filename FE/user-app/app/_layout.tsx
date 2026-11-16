@@ -1,4 +1,4 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Slot, router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, useRef } from 'react';
@@ -160,21 +160,19 @@ const splash = StyleSheet.create({
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const { loadToken, logout, isAuthenticated } = useAuthStore();
+  const { loadToken, isAuthenticated } = useAuthStore();
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const init = async () => {
-      // Saat aplikasi dibuka dari Expo Go, selalu mulai dari login.
-      // Ini juga membersihkan token lama yang membuat aplikasi langsung masuk Home.
-      await logout();
-
+      // Pulihkan session yang tersimpan agar pengguna tidak perlu login ulang.
+      await loadToken();
       // Minimal 2 detik supaya splash screen sempat terlihat.
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1200));
       setIsReady(true);
     };
     init();
-  }, [loadToken, logout]);
+  }, [loadToken]);
 
   useEffect(() => {
     if (!isReady) return;

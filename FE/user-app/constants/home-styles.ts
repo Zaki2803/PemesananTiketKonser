@@ -80,7 +80,7 @@ export const homeStyles = StyleSheet.create({
   bannerTitle: { color: '#fff', fontSize: 18, fontWeight: '700' },
   bannerSub: { color: 'rgba(255,255,255,0.7)', fontSize: 12, marginTop: 2 },
   dotsRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 10, gap: 6 },
-  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#374151' },
+  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#CBD5E1' },
   dotActive: { backgroundColor: YELLOW, width: 18 },
 
   // Categories
@@ -96,7 +96,7 @@ export const homeStyles = StyleSheet.create({
   },
   catBtnActive: { backgroundColor: YELLOW, borderColor: YELLOW },
   catText: { color: GRAY, fontSize: 13, fontWeight: '500' },
-  catTextActive: { color: '#1a1a2e', fontWeight: '700' },
+  catTextActive: { color: '#FFFFFF', fontWeight: '700' },
 
   // Section
   sectionHeader: {
@@ -107,8 +107,8 @@ export const homeStyles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 12,
   },
-  sectionTitle: { color: '#fff', fontSize: 18, fontWeight: '700' },
-  seeAll: { color: YELLOW, fontSize: 13, fontWeight: '500' },
+  sectionTitle: { color: '#172033', fontSize: 18, fontWeight: '700' },
+  seeAll: { color: YELLOW, fontSize: 13, fontWeight: '600' },
   emptyText: { color: GRAY, fontSize: 14, paddingHorizontal: 8, paddingVertical: 20 },
 
   // Event Card
@@ -142,7 +142,7 @@ export const homeStyles = StyleSheet.create({
     padding: 6,
   },
   eventCardBody: { padding: 12 },
-  eventCardTitle: { color: '#fff', fontSize: 14, fontWeight: '700', marginBottom: 2 },
+  eventCardTitle: { color: '#172033', fontSize: 14, fontWeight: '700', marginBottom: 2 },
   eventCardArtist: { color: GRAY, fontSize: 12, marginBottom: 8 },
   eventCardFooter: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   eventCardPrice: { color: YELLOW, fontSize: 13, fontWeight: '700' },
@@ -163,6 +163,6 @@ export const homeStyles = StyleSheet.create({
   },
   upcomingImg: { width: 64, height: 64, borderRadius: 10 },
   upcomingInfo: { flex: 1 },
-  upcomingTitle: { color: '#fff', fontSize: 14, fontWeight: '600', marginBottom: 4 },
+  upcomingTitle: { color: '#172033', fontSize: 14, fontWeight: '600', marginBottom: 4 },
   upcomingArtist: { color: GRAY, fontSize: 12 },
 });

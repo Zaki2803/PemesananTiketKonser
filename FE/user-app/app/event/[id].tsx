@@ -71,7 +71,18 @@ export default function EventDetailScreen() {
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.topNav}>
+        <TouchableOpacity style={styles.navBackBtn} onPress={() => router.back()}>
+          <Ionicons name="arrow-back" size={21} color="#fff" />
+        </TouchableOpacity>
+        <Text style={styles.navTitle}>Detail Konser</Text>
+        <View style={styles.navSpacer} />
+      </View>
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
         {/* Hero Image */}
         <View style={styles.heroContainer}>
           <ImageBackground
@@ -267,6 +278,25 @@ export default function EventDetailScreen() {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: BG },
+  topNav: {
+    height: 64,
+    paddingHorizontal: 18,
+    paddingTop: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#111827',
+    borderBottomWidth: 1,
+    borderBottomColor: '#1f2937',
+  },
+  navBackBtn: {
+    width: 38, height: 38, borderRadius: 10,
+    alignItems: 'center', justifyContent: 'center',
+    backgroundColor: '#1c2333',
+  },
+  navTitle: { color: '#fff', fontSize: 16, fontWeight: '700' },
+  navSpacer: { width: 38 },
+  scrollContent: { paddingTop: 18, paddingBottom: 32 },
   loadingContainer: { flex: 1, backgroundColor: BG, justifyContent: 'center', alignItems: 'center' },
 
   // Hero
