@@ -8,8 +8,8 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useAuthStore } from '@/store/auth.store';
 
-const YELLOW = '#F5C518';
-const BG = '#0d1117';
+const YELLOW = '#3B82F6';
+const BG = '#0B1120';
 
 function SplashScreen() {
   const logoAnim = useRef(new Animated.Value(0)).current;

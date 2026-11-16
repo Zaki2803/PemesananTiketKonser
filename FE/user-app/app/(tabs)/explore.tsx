@@ -21,10 +21,10 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { eventService, Event } from '@/services/event.service';
 import { getImageUrl } from '@/utils/image';
 
-const BG = '#0d1117';
-const CARD = '#111827';
-const YELLOW = '#F5C518';
-const GRAY = '#6B7280';
+const BG = '#0B1120';
+const CARD = '#1E293B';
+const YELLOW = '#3B82F6';
+const GRAY = '#94A3B8';
 const GREEN = '#22c55e';
 
 const CATEGORIES = ['All', 'Pop', 'Rock','Classical', 'Jazz', 'Heavy Metal'];
@@ -409,7 +409,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     marginBottom: 14,
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#475569',
   },
   searchIcon: { marginRight: 8 },
   searchInput: { flex: 1, color: '#fff', fontSize: 14 },
@@ -427,7 +427,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: CARD,
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#475569',
   },
   filterBtnActive: { backgroundColor: YELLOW, borderColor: YELLOW },
   filterText: { color: GRAY, fontSize: 13, fontWeight: '500' },
@@ -446,7 +446,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: CARD,
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#475569',
   },
   sortBtnActive: { borderColor: YELLOW },
   sortText: { color: GRAY, fontSize: 13 },
@@ -459,7 +459,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#475569',
   },
   cardImage: {
     height: 160,
@@ -495,7 +495,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     gap: 12,
     borderTopWidth: 1,
-    borderTopColor: '#1f2937',
+    borderTopColor: '#475569',
   },
   footerItem: {
     flexDirection: 'row',
@@ -530,12 +530,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalBox: {
-    backgroundColor: '#111827',
+    backgroundColor: '#1E293B',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     paddingBottom: 32,
     borderTopWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#475569',
   },
   modalHeader: {
     flexDirection: 'row',
@@ -544,7 +544,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#1f2937',
+    borderBottomColor: '#475569',
   },
   modalTitle: { color: '#fff', fontSize: 16, fontWeight: '700' },
   modalFooter: {

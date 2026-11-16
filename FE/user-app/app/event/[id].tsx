@@ -12,11 +12,11 @@ import dayjs from 'dayjs';
 import { eventService, Event, TicketCategory } from '@/services/event.service';
 import { getImageUrl } from '@/utils/image';
 
-const BG = '#0d1117';
-const CARD = '#111827';
-const CARD2 = '#1c2333';
-const YELLOW = '#F5C518';
-const GRAY = '#6B7280';
+const BG = '#0B1120';
+const CARD = '#1E293B';
+const CARD2 = '#334155';
+const YELLOW = '#3B82F6';
+const GRAY = '#94A3B8';
 const GREEN = '#22c55e';
 
 export default function EventDetailScreen() {
@@ -286,14 +286,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#111827',
+    backgroundColor: '#1E293B',
     borderBottomWidth: 1,
-    borderBottomColor: '#1f2937',
+    borderBottomColor: '#475569',
   },
   navBackBtn: {
     width: 38, height: 38, borderRadius: 10,
     alignItems: 'center', justifyContent: 'center',
-    backgroundColor: '#1c2333',
+    backgroundColor: '#334155',
   },
   navTitle: { color: '#fff', fontSize: 16, fontWeight: '700' },
   navSpacer: { width: 38 },
@@ -380,7 +380,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#475569',
     marginBottom: 20,
   },
   tableRow: {
@@ -388,7 +388,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#1f2937',
+    borderBottomColor: '#475569',
   },
   tableRowSelected: { backgroundColor: '#1a2640' },
   tableHeader: { backgroundColor: '#0f172a' },
@@ -419,7 +419,7 @@ const styles = StyleSheet.create({
     padding: 14,
     gap: 10,
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#475569',
   },
   benefitItem: {
     flexDirection: 'row',
@@ -436,7 +436,7 @@ const styles = StyleSheet.create({
     padding: 14,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#475569',
     gap: 8,
   },
   ruleItem: { flexDirection: 'row', alignItems: 'flex-start', gap: 8 },
@@ -449,7 +449,7 @@ const styles = StyleSheet.create({
   // Progress
   progressContainer: { marginBottom: 20 },
   progressBg: {
-    height: 8, backgroundColor: '#1f2937',
+    height: 8, backgroundColor: '#475569',
     borderRadius: 4, overflow: 'hidden', marginBottom: 8,
   },
   progressBar: {
@@ -464,7 +464,7 @@ const styles = StyleSheet.create({
   bottomBar: {
     position: 'absolute',
     bottom: 0, left: 0, right: 0,
-    backgroundColor: '#111827',
+    backgroundColor: '#1E293B',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -472,7 +472,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingBottom: 28,
     borderTopWidth: 1,
-    borderTopColor: '#1f2937',
+    borderTopColor: '#475569',
   },
   bottomFrom: { color: GRAY, fontSize: 12 },
   bottomPrice: { color: YELLOW, fontSize: 18, fontWeight: '700' },
