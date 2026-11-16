@@ -7,9 +7,11 @@ import {
   StyleSheet,
   type ScrollViewInstance,
 } from 'react-native';
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import dayjs from 'dayjs';
 import { Event } from '@/services/event.service';
+import { getImageUrl } from '@/utils/image';
 import { homeStyles as s, FEATURED_W } from '@/constants/home-styles';
 
 interface Props {
@@ -46,6 +48,7 @@ export default function FeaturedBanner({ events, activeIndex, onIndexChange }: P
         }}
       >
         {events.map((event) => {
+          const imgUrl = getImageUrl(event.poster);
           const cats = event.ticket_categories ?? [];
           const minPrice =
             event.min_price != null && Number(event.min_price) > 0
@@ -62,7 +65,14 @@ export default function FeaturedBanner({ events, activeIndex, onIndexChange }: P
             >
               <View style={local.slide}>
                 <View style={local.bluePanel}>
+                  <Image
+                    source={imgUrl ? { uri: imgUrl } : require('@/assets/images/splash-icon.png')}
+                    style={local.poster}
+                    contentFit="cover"
+                    transition={250}
+                  />
                   <View style={local.decorCircle} />
+                  <View style={local.posterShade} />
                   <Text style={local.eyebrow}>FEATURED CONCERT</Text>
                   <Text style={local.artistName} numberOfLines={1}>
                     {event.artist_name || event.title}
@@ -114,6 +124,24 @@ const local = StyleSheet.create({
     paddingTop: 18,
     overflow: 'hidden',
   },
+  poster: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    width: 112,
+    height: 142,
+    borderRadius: 12,
+    opacity: 0.92,
+  },
+  posterShade: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    width: 112,
+    height: 142,
+    borderRadius: 12,
+    backgroundColor: 'rgba(37,99,217,0.25)',
+  },
   decorCircle: {
     position: 'absolute',
     width: 126,
@@ -138,7 +166,7 @@ const local = StyleSheet.create({
     lineHeight: 30,
     fontWeight: '900',
     letterSpacing: -0.5,
-    maxWidth: '90%',
+    maxWidth: '58%',
   },
   eventName: {
     color: '#DBEAFE',
