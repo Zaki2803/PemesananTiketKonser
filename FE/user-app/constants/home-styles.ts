@@ -2,167 +2,195 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-export const BG = '#0d1117';
-export const CARD = '#111827';
-export const CARD2 = '#1c2333';
+export const BG     = '#0d1117';
+export const CARD   = '#161b25';
+export const CARD2  = '#1c2333';
 export const YELLOW = '#F5C518';
-export const GRAY = '#6B7280';
-export const FEATURED_W = width - 48;
+export const GRAY   = '#8B95A6';
+export const WHITE  = '#FFFFFF';
+export const WHITE2 = 'rgba(255,255,255,0.65)';
+
+/** Lebar satu slide banner = lebar layar (full-bleed) */
+export const FEATURED_W = width;
 
 export const homeStyles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: BG },
+  root:   { flex: 1, backgroundColor: BG },
   scroll: { flex: 1 },
 
-  // Header
+  // ─── Header ────────────────────────────────────────────────────────────────
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 24,
-    paddingTop: 56,
-    paddingBottom: 16,
+    paddingHorizontal: 20,
+    paddingTop: 54,
+    paddingBottom: 14,
   },
-  greeting: { color: '#fff', fontSize: 22, fontWeight: '700' },
-  wave: { fontSize: 22 },
-  greetingSubtitle: { color: GRAY, fontSize: 13, marginTop: 2 },
+  greeting:        { color: WHITE,  fontSize: 23, fontWeight: '800', letterSpacing: 0.2 },
+  wave:            { fontSize: 23 },
+  greetingSubtitle:{ color: GRAY,   fontSize: 13, marginTop: 3 },
 
-  // Search
+  // ─── Search ────────────────────────────────────────────────────────────────
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: CARD,
     borderRadius: 14,
-    marginHorizontal: 24,
+    marginHorizontal: 20,
     paddingHorizontal: 14,
-    paddingVertical: 12,
-    marginBottom: 16,
+    paddingVertical: 13,
+    marginBottom: 18,
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#252d3d',
   },
-  searchIcon: { marginRight: 8 },
-  searchInput: { flex: 1, color: '#fff', fontSize: 14 },
+  searchIcon:  { marginRight: 8 },
+  searchInput: { flex: 1, color: WHITE, fontSize: 14, letterSpacing: 0.1 },
 
-  // Banner
-  bannerWrapper: { marginHorizontal: 24, marginBottom: 4 },
+  // ─── Banner (full-width, taller) ───────────────────────────────────────────
+  bannerWrapper:  { marginBottom: 6 },
   bannerLoading: {
-    height: 180,
-    marginHorizontal: 24,
-    borderRadius: 16,
+    height: 220,
+    marginHorizontal: 20,
+    borderRadius: 20,
     backgroundColor: CARD,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   bannerBg: {
     width: FEATURED_W,
-    height: 180,
-    borderRadius: 16,
-    overflow: 'hidden',
+    height: 220,
     justifyContent: 'flex-end',
   },
-  bannerImage: { borderRadius: 16 },
+  bannerImage: {},
   bannerOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.45)',
-    borderRadius: 16,
+    ...StyleSheet.absoluteFill,
+    // gradient-like: transparan atas → hitam bawah
+    backgroundColor: 'transparent',
   },
   featuredBadge: {
     position: 'absolute',
-    top: 12,
-    right: 12,
+    top: 14,
+    left: 20,
     backgroundColor: YELLOW,
     borderRadius: 8,
     paddingHorizontal: 10,
     paddingVertical: 4,
   },
-  featuredBadgeText: { color: '#1a1a2e', fontSize: 11, fontWeight: '700' },
-  bannerContent: { padding: 16 },
-  bannerTitle: { color: '#fff', fontSize: 18, fontWeight: '700' },
-  bannerSub: { color: 'rgba(255,255,255,0.7)', fontSize: 12, marginTop: 2 },
-  dotsRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 10, gap: 6 },
-  dot: { width: 6, height: 6, borderRadius: 3, backgroundColor: '#CBD5E1' },
-  dotActive: { backgroundColor: YELLOW, width: 18 },
+  featuredBadgeText: { color: '#111', fontSize: 10, fontWeight: '800', letterSpacing: 0.6 },
+  bannerContent:     { padding: 20, paddingTop: 0 },
+  bannerTitle:       { color: WHITE, fontSize: 20, fontWeight: '800', letterSpacing: 0.1 },
+  bannerSub:         { color: WHITE2, fontSize: 13, marginTop: 4 },
+  bannerBtn: {
+    marginTop: 10,
+    alignSelf: 'flex-start',
+    backgroundColor: YELLOW,
+    paddingHorizontal: 16,
+    paddingVertical: 7,
+    borderRadius: 10,
+  },
+  bannerBtnText: { color: '#111', fontSize: 12, fontWeight: '700' },
+  dotsRow:    { flexDirection: 'row', justifyContent: 'center', marginTop: 10, gap: 6 },
+  dot:        { width: 6, height: 6, borderRadius: 3, backgroundColor: '#3a4258' },
+  dotActive:  { backgroundColor: YELLOW, width: 20, borderRadius: 4 },
 
-  // Categories
-  categories: { marginBottom: 8 },
-  categoriesContent: { paddingHorizontal: 24, gap: 8 },
+  // ─── Category chips ────────────────────────────────────────────────────────
+  categories:        { marginBottom: 4 },
+  categoriesContent: { paddingHorizontal: 20, gap: 8 },
   catBtn: {
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
     backgroundColor: CARD,
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#252d3d',
   },
-  catBtnActive: { backgroundColor: YELLOW, borderColor: YELLOW },
-  catText: { color: GRAY, fontSize: 13, fontWeight: '500' },
-  catTextActive: { color: '#FFFFFF', fontWeight: '700' },
+  catBtnActive:   { backgroundColor: YELLOW, borderColor: YELLOW },
+  catText:        { color: GRAY,   fontSize: 13, fontWeight: '500' },
+  catTextActive:  { color: '#111', fontSize: 13, fontWeight: '800' },
 
-  // Section
+  // ─── Section header ────────────────────────────────────────────────────────
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 24,
-    marginTop: 20,
-    marginBottom: 12,
+    paddingHorizontal: 20,
+    marginTop: 22,
+    marginBottom: 14,
   },
-  sectionTitle: { color: '#172033', fontSize: 18, fontWeight: '700' },
-  seeAll: { color: YELLOW, fontSize: 13, fontWeight: '600' },
-  emptyText: { color: GRAY, fontSize: 14, paddingHorizontal: 8, paddingVertical: 20 },
+  sectionTitle: { color: WHITE,  fontSize: 18, fontWeight: '800' },
+  seeAll:       { color: YELLOW, fontSize: 13, fontWeight: '600' },
+  emptyText:    { color: GRAY,   fontSize: 14, paddingHorizontal: 8, paddingVertical: 20 },
 
-  // Event Card
-  featuredListContent: { paddingHorizontal: 24, gap: 14 },
+  // ─── Event Card (vertical card in horizontal scroll) ───────────────────────
+  featuredListContent: { paddingHorizontal: 20, gap: 14, paddingBottom: 4 },
   eventCard: {
-    width: 200,
+    width: 190,
     backgroundColor: CARD2,
-    borderRadius: 16,
+    borderRadius: 18,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: '#1f2937',
+    borderColor: '#252d3d',
   },
-  eventCardImg: { width: '100%', height: 130, position: 'relative' },
-  eventCardImgFill: { width: '100%', height: '100%' },
+  eventCardImg:    { width: '100%', height: 140, position: 'relative' },
+  eventCardImgFill:{ width: '100%', height: '100%' },
+
+  // gradient overlay di bawah gambar
+  eventCardImgGrad: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 56,
+    backgroundColor: 'transparent',
+  },
   genreBadge: {
     position: 'absolute',
     bottom: 10,
     left: 10,
-    backgroundColor: 'rgba(245,197,24,0.9)',
+    backgroundColor: 'rgba(245,197,24,0.92)',
     borderRadius: 6,
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
-  genreText: { color: '#1a1a2e', fontSize: 10, fontWeight: '700' },
+  genreText: { color: '#111', fontSize: 10, fontWeight: '800' },
   heartBtn: {
     position: 'absolute',
     top: 10,
     right: 10,
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: 'rgba(0,0,0,0.45)',
     borderRadius: 20,
     padding: 6,
   },
-  eventCardBody: { padding: 12 },
-  eventCardTitle: { color: '#172033', fontSize: 14, fontWeight: '700', marginBottom: 2 },
-  eventCardArtist: { color: GRAY, fontSize: 12, marginBottom: 8 },
-  eventCardFooter: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-  eventCardPrice: { color: YELLOW, fontSize: 13, fontWeight: '700' },
-  eventCardQuota: { color: GRAY, fontSize: 11 },
 
-  // Upcoming Card
+  eventCardBody:   { padding: 12, gap: 2 },
+  eventCardTitle:  { color: WHITE, fontSize: 14, fontWeight: '700', marginBottom: 1 },
+  eventCardArtist: { color: GRAY,  fontSize: 12, marginBottom: 8 },
+  eventCardFooter: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  eventCardPrice:  { color: YELLOW, fontSize: 12, fontWeight: '700' },
+  eventCardQuota:  { color: GRAY,   fontSize: 11 },
+
+  // ─── Upcoming Card (row card) ──────────────────────────────────────────────
   upcomingCard: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: CARD,
-    marginHorizontal: 24,
+    marginHorizontal: 20,
     marginBottom: 10,
-    borderRadius: 14,
+    borderRadius: 16,
     padding: 12,
     borderWidth: 1,
-    borderColor: '#1f2937',
-    gap: 12,
+    borderColor: '#252d3d',
+    gap: 14,
   },
-  upcomingImg: { width: 64, height: 64, borderRadius: 10 },
-  upcomingInfo: { flex: 1 },
-  upcomingTitle: { color: '#172033', fontSize: 14, fontWeight: '600', marginBottom: 4 },
-  upcomingArtist: { color: GRAY, fontSize: 12 },
+  upcomingImg:    { width: 68, height: 68, borderRadius: 12 },
+  upcomingInfo:   { flex: 1 },
+  upcomingTitle:  { color: WHITE, fontSize: 14, fontWeight: '700', marginBottom: 4 },
+  upcomingArtist: { color: GRAY,  fontSize: 12 },
+  upcomingDate: {
+    fontSize: 11,
+    color: YELLOW,
+    fontWeight: '600',
+    marginTop: 4,
+  },
 });

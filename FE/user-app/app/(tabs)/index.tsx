@@ -19,7 +19,7 @@ import FeaturedBanner from '@/components/home/FeaturedBanner';
 import EventCard from '@/components/home/EventCard';
 import UpcomingCard from '@/components/home/UpcomingCard';
 
-const CATEGORIES = ['All', 'Pop', 'Classical', 'Jazz', 'Rock','Heavy Metal'];
+const CATEGORIES = ['All', 'Pop', 'Classical', 'Jazz', 'Rock', 'Heavy Metal'];
 
 export default function HomeScreen() {
   const { user } = useAuthStore();
@@ -68,7 +68,7 @@ export default function HomeScreen() {
 
   return (
     <View style={s.root}>
-      <StatusBar barStyle="light-content" backgroundColor={BG} />
+      <StatusBar barStyle="light-content" />
       <ScrollView
         style={s.scroll}
         showsVerticalScrollIndicator={false}
@@ -76,32 +76,37 @@ export default function HomeScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={YELLOW} />
         }
       >
-        {/* Header */}
+        {/* ── Header ── */}
         <View style={s.header}>
           <View>
             <Text style={s.greeting}>
-              {firstName} <Text style={s.wave}>👋</Text>
+              Hi, {firstName} <Text style={s.wave}>👋</Text>
             </Text>
-            <Text style={s.greetingSubtitle}>Find your next concert</Text>
+            <Text style={s.greetingSubtitle}>Find your next concert experience</Text>
           </View>
           <TouchableOpacity onPress={() => router.push('/profile' as any)}>
-            <AvatarInitial name={user?.name ?? 'U'} size={42} fontSize={17} />
+            <AvatarInitial name={user?.name ?? 'U'} size={44} fontSize={17} />
           </TouchableOpacity>
         </View>
 
-        {/* Search */}
+        {/* ── Search ── */}
         <View style={s.searchContainer}>
           <Ionicons name="search" size={18} color={GRAY} style={s.searchIcon} />
           <TextInput
             style={s.searchInput}
-            placeholder="Search concerts, artists..."
+            placeholder="Cari konser, artis..."
             placeholderTextColor={GRAY}
             value={search}
             onChangeText={setSearch}
           />
+          {search.length > 0 && (
+            <TouchableOpacity onPress={() => setSearch('')}>
+              <Ionicons name="close-circle" size={18} color={GRAY} />
+            </TouchableOpacity>
+          )}
         </View>
 
-        {/* Featured Banner */}
+        {/* ── Featured Banner ── */}
         {loading ? (
           <View style={s.bannerLoading}>
             <ActivityIndicator color={YELLOW} size="large" />
@@ -114,7 +119,7 @@ export default function HomeScreen() {
           />
         )}
 
-        {/* Category Filter */}
+        {/* ── Category Chips ── */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -134,41 +139,45 @@ export default function HomeScreen() {
           ))}
         </ScrollView>
 
-        {/* Featured Events */}
+        {/* ── Featured Events ── */}
         <View style={s.sectionHeader}>
-          <Text style={s.sectionTitle}>Featured</Text>
+          <Text style={s.sectionTitle}>Featured Events</Text>
           <TouchableOpacity onPress={() => router.push('/explore' as any)}>
-            <Text style={s.seeAll}>See all →</Text>
+            <Text style={s.seeAll}>Lihat semua →</Text>
           </TouchableOpacity>
         </View>
 
         {loading ? (
           <ActivityIndicator color={YELLOW} style={{ marginVertical: 20 }} />
+        ) : filteredEvents.length === 0 ? (
+          <Text style={[s.emptyText, { paddingHorizontal: 20 }]}>
+            Tidak ada event ditemukan
+          </Text>
         ) : (
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={s.featuredListContent}
           >
-            {filteredEvents.slice(0, 6).map((event) => (
+            {filteredEvents.slice(0, 8).map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
-            {filteredEvents.length === 0 && (
-              <Text style={s.emptyText}>Tidak ada event ditemukan</Text>
-            )}
           </ScrollView>
         )}
 
-        {/* Upcoming */}
-        <View style={s.sectionHeader}>
-          <Text style={s.sectionTitle}>Upcoming</Text>
-        </View>
+        {/* ── Upcoming ── */}
+        {upcomingEvents.length > 0 && (
+          <>
+            <View style={s.sectionHeader}>
+              <Text style={s.sectionTitle}>Upcoming</Text>
+            </View>
+            {upcomingEvents.slice(0, 6).map((event) => (
+              <UpcomingCard key={event.id} event={event} />
+            ))}
+          </>
+        )}
 
-        {upcomingEvents.slice(0, 5).map((event) => (
-          <UpcomingCard key={event.id} event={event} />
-        ))}
-
-        <View style={{ height: 24 }} />
+        <View style={{ height: 32 }} />
       </ScrollView>
     </View>
   );
