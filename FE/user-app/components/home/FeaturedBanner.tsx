@@ -48,7 +48,9 @@ export default function FeaturedBanner({ events, activeIndex, onIndexChange }: P
         }}
       >
         {events.map((event) => {
-          const imgUrl = getImageUrl(event.poster);
+          // Gunakan foto grup/artis dari database sebagai background utama banner.
+          // Poster event menjadi fallback jika artist_photo belum tersedia.
+          const backgroundUrl = getImageUrl(event.artist_photo || event.poster);
           const cats = event.ticket_categories ?? [];
           const minPrice =
             event.min_price != null && Number(event.min_price) > 0
@@ -66,13 +68,13 @@ export default function FeaturedBanner({ events, activeIndex, onIndexChange }: P
               <View style={local.slide}>
                 <View style={local.bluePanel}>
                   <Image
-                    source={imgUrl ? { uri: imgUrl } : require('@/assets/images/splash-icon.png')}
-                    style={local.poster}
+                    source={backgroundUrl ? { uri: backgroundUrl } : require('@/assets/images/splash-icon.png')}
+                    style={local.backgroundImage}
                     contentFit="cover"
                     transition={250}
                   />
+                  <View style={local.imageOverlay} />
                   <View style={local.decorCircle} />
-                  <View style={local.posterShade} />
                   <Text style={local.eyebrow}>FEATURED CONCERT</Text>
                   <Text style={local.artistName} numberOfLines={1}>
                     {event.artist_name || event.title}
@@ -124,23 +126,13 @@ const local = StyleSheet.create({
     paddingTop: 18,
     overflow: 'hidden',
   },
-  poster: {
-    position: 'absolute',
-    right: 10,
-    top: 10,
-    width: 112,
-    height: 142,
-    borderRadius: 12,
-    opacity: 0.92,
+  backgroundImage: {
+    ...StyleSheet.absoluteFill,
+    opacity: 0.96,
   },
-  posterShade: {
-    position: 'absolute',
-    right: 10,
-    top: 10,
-    width: 112,
-    height: 142,
-    borderRadius: 12,
-    backgroundColor: 'rgba(37,99,217,0.25)',
+  imageOverlay: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: 'rgba(11,17,32,0.38)',
   },
   decorCircle: {
     position: 'absolute',
