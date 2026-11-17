@@ -160,28 +160,25 @@ const splash = StyleSheet.create({
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const { loadToken, isAuthenticated } = useAuthStore();
+  const logout = useAuthStore((state) => state.logout);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const init = async () => {
-      // Pulihkan session yang tersimpan agar pengguna tidak perlu login ulang.
-      await loadToken();
-      // Minimal 2 detik supaya splash screen sempat terlihat.
+      // Selalu mulai dari halaman login saat aplikasi dibuka ulang melalui Expo Go.
+      // Token lama dihapus agar aplikasi tidak langsung masuk ke Home.
+      await logout();
+      // Minimal 1,2 detik supaya splash screen sempat terlihat.
       await new Promise((resolve) => setTimeout(resolve, 1200));
       setIsReady(true);
     };
     init();
-  }, [loadToken]);
+  }, [logout]);
 
   useEffect(() => {
     if (!isReady) return;
-    if (isAuthenticated) {
-      router.replace('/(tabs)');
-    } else {
-      router.replace('/(auth)/login');
-    }
-  }, [isReady, isAuthenticated]);
+    router.replace('/(auth)/login');
+  }, [isReady]);
 
   if (!isReady) {
     return <SplashScreen />;
