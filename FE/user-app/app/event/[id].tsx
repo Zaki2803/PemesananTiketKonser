@@ -91,10 +91,6 @@ export default function EventDetailScreen() {
             style={styles.heroImage}
           >
             <View style={styles.heroOverlay} />
-            {/* Back button */}
-            <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>
-              <Ionicons name="arrow-back" size={20} color="#fff" />
-            </TouchableOpacity>
             {/* Status badge */}
             <View style={[styles.heroBadge, { backgroundColor: isOpen ? 'rgba(34,197,94,0.85)' : 'rgba(239,68,68,0.85)' }]}>
               <Text style={styles.heroBadgeText}>{isOpen ? 'Open' : 'Closed'}</Text>
@@ -280,9 +276,9 @@ export default function EventDetailScreen() {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: BG },
   topNav: {
-    height: 64,
+    height: 82,
     paddingHorizontal: 18,
-    paddingTop: 12,
+    paddingTop: 24,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -297,7 +293,7 @@ const styles = StyleSheet.create({
   },
   navTitle: { color: '#fff', fontSize: 16, fontWeight: '700' },
   navSpacer: { width: 38 },
-  scrollContent: { paddingTop: 18, paddingBottom: 32 },
+  scrollContent: { paddingTop: 0, paddingBottom: 32 },
   loadingContainer: { flex: 1, backgroundColor: BG, justifyContent: 'center', alignItems: 'center' },
 
   // Hero
